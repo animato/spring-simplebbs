@@ -1,4 +1,4 @@
-package com.example.simplebbs.domain;
+package com.example.simplebbs.article;
 
 import java.time.Instant;
 
