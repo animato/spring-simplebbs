@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -44,5 +45,12 @@ public class ArticleController {
         List<Article> articles = articleService.getAllArticles();
         model.addAttribute("articles", articles);
         return "list";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable("id") Long id, Model model) {
+        Article article = articleService.getArticleById(id);
+        model.addAttribute("article", article);
+        return "view";
     }
 }

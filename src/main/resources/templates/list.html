@@ -25,7 +25,8 @@
         <tr th:each="article : ${articles}">
             <!-- th:text 속성으로 각 필드의 값을 텍스트로 삽입 -->
             <th scope="row" th:text="${article.id}">1</th>
-            <td><a href="./view.html" th:text="${article.subject}">예시 글 제목</a></td>
+            <!-- th:href 속성으로 제목 링크의 href를 '/view/{id}'로 설정 -->
+            <td><a th:href="@{/view/{id}(id=${article.id})}" th:text="${article.subject}">예시 글 제목</a></td>
             <td th:text="${article.author}">홍길동</td>
             <td th:text="${#dates.format(article.createdAt, 'yyyy-MM-dd')}">2024-06-26</td>
         </tr>

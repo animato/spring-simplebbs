@@ -21,4 +21,8 @@ public class ArticleService {
     public List<Article> getAllArticles() {
         return articleMapper.getAllArticles();
     }
+
+    public Article getArticleById(Long id) {
+        return articleMapper.getArticleById(id);
+    }
 }
