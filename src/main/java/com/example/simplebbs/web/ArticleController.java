@@ -1,5 +1,6 @@
 package com.example.simplebbs.web;
 
+import com.example.simplebbs.article.Article;
 import com.example.simplebbs.article.ArticleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ArticleController {
@@ -33,6 +36,13 @@ public class ArticleController {
         // ArticleService의 writeArticle 메소드 호출
         articleService.writeArticle(articleInput.getSubject(), articleInput.getContents(), articleInput.getAuthor());
 
-        return "redirect:/write";
+        return "redirect:/";
+    }
+
+    @GetMapping("/")
+    public String list(Model model) {
+        List<Article> articles = articleService.getAllArticles();
+        model.addAttribute("articles", articles);
+        return "list";
     }
 }
