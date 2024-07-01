@@ -2,6 +2,8 @@ package com.example.simplebbs.web;
 
 import com.example.simplebbs.article.Article;
 import com.example.simplebbs.article.ArticleService;
+import com.example.simplebbs.user.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,13 +31,15 @@ public class ArticleController {
     }
 
     @PostMapping("/write")
-    public String submitForm(@Validated @ModelAttribute ArticleInput articleInput, BindingResult bindingResult) {
+    public String submitForm(@Validated @ModelAttribute ArticleInput articleInput,
+                             BindingResult bindingResult,
+                             @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             return "write";
         }
 
         // ArticleService의 writeArticle 메소드 호출
-        articleService.writeArticle(articleInput.getSubject(), articleInput.getContents(), articleInput.getAuthor());
+        articleService.writeArticle(articleInput.getSubject(), articleInput.getContents(), user.getUsername(), user.getId());
 
         return "redirect:/";
     }

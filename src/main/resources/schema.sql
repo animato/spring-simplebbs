@@ -5,6 +5,7 @@ CREATE TABLE `article` (
   `subject` varchar(255) NOT NULL,
   `contents` text NOT NULL,
   `author` varchar(255) NOT NULL,
+  `user_id` bigint(20) NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)

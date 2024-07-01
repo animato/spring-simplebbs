@@ -13,8 +13,8 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
 
-    public void writeArticle(String subject, String contents, String author) {
-        Article article = new Article(subject, contents, author);
+    public void writeArticle(String subject, String contents, String author, Long userId) {
+        Article article = new Article(subject, contents, author, userId);
         articleMapper.insertArticle(article);
     }
 
