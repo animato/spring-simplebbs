@@ -9,6 +9,11 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-4">글 목록</h1>
+    <!-- 로그인 된 사용자의 이름을 표시하는 태그 추가 -->
+    <div class="mb-3">
+        <span>로그인 된 사용자: </span>
+        <span sec:authentication="name">사용자 이름</span>
+    </div>
     <!-- th:href 속성으로 '글 쓰기' 버튼 링크를 '/write'로 변경 -->
     <a th:href="@{/write}" class="btn btn-primary mb-3">글 쓰기</a>
     <table class="table table-striped">
