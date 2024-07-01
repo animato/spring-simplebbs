@@ -12,6 +12,8 @@ CREATE TABLE `article` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-    username VARCHAR(50) NOT NULL PRIMARY KEY,
-    password VARCHAR(100) NOT NULL
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(50) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
