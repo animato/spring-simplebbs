@@ -25,4 +25,22 @@ public class ArticleService {
     public Article getArticleById(Long id) {
         return articleMapper.getArticleById(id);
     }
+
+    public void updateArticle(Long id, String subject, String contents, Long userId) {
+        Article article = articleMapper.getArticleById(id);
+
+        if (article == null || !article.getUserId().equals(userId)) {
+            throw new IllegalStateException("글을 수정할 수 없습니다.");
+        }
+        articleMapper.updateArticle(id, subject, contents);
+    }
+
+    public void deleteArticle(Long id, Long userId) {
+        Article article = articleMapper.getArticleById(id);
+
+        if (article == null || !article.getUserId().equals(userId)) {
+            throw new IllegalStateException("글을 삭제할 수 없습니다.");
+        }
+        articleMapper.deleteArticle(id);
+    }
 }

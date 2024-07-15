@@ -20,7 +20,7 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-    public ArticleController(ArticleService articleService){
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
     }
 
@@ -56,5 +56,30 @@ public class ArticleController {
         Article article = articleService.getArticleById(id);
         model.addAttribute("article", article);
         return "view";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPage(@PathVariable Long id, Model model, @AuthenticationPrincipal User user) {
+        Article article = articleService.getArticleById(id);
+
+        model.addAttribute("article", article);
+        return "edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editArticle(@PathVariable Long id, @Validated @ModelAttribute ArticleInput articleInput,
+                              BindingResult bindingResult, @AuthenticationPrincipal User user) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
+
+        articleService.updateArticle(id, articleInput.getSubject(), articleInput.getContents(), user.getId());
+        return "redirect:/view/" + id;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteArticle(@PathVariable Long id, @AuthenticationPrincipal User user) {
+        articleService.deleteArticle(id, user.getId());
+        return "redirect:/";
     }
 }

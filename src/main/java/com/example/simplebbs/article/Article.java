@@ -22,6 +22,7 @@ public class Article {
         this.author = author;
         this.userId = userId;
         this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 
     // Getter 메서드
