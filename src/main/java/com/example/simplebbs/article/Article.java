@@ -1,6 +1,7 @@
 package com.example.simplebbs.article;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Random;
 
 public class Article {
@@ -25,11 +26,15 @@ public class Article {
         this.updatedAt = Instant.now();
     }
 
+    public boolean isAuthor(Long userId) {
+        return Objects.equals(this.userId, userId);
+    }
+
     // Getter 메서드
     public Long getId() {
         return id;
     }
-    
+
     public String getSubject() {
         return subject;
     }

@@ -3,6 +3,7 @@ package com.example.simplebbs.web;
 import com.example.simplebbs.article.Article;
 import com.example.simplebbs.article.ArticleService;
 import com.example.simplebbs.user.User;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,17 +70,25 @@ public class ArticleController {
     @PostMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, @Validated @ModelAttribute ArticleInput articleInput,
                               BindingResult bindingResult, @AuthenticationPrincipal User user) {
-        if (bindingResult.hasErrors()) {
-            return "edit";
-        }
+        try {
+            if (bindingResult.hasErrors()) {
+                return "edit";
+            }
 
-        articleService.updateArticle(id, articleInput.getSubject(), articleInput.getContents(), user.getId());
-        return "redirect:/view/" + id;
+            articleService.updateArticle(id, articleInput.getSubject(), articleInput.getContents(), user.getId());
+            return "redirect:/view/" + id;
+        } catch (IllegalStateException ise) {
+            throw new AccessDeniedException("글을 수정할 권한이 없습니다.");
+        }
     }
 
     @PostMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id, @AuthenticationPrincipal User user) {
-        articleService.deleteArticle(id, user.getId());
-        return "redirect:/";
+        try {
+            articleService.deleteArticle(id, user.getId());
+            return "redirect:/";
+        } catch (IllegalStateException ise) {
+            throw new AccessDeniedException("글을 삭제할 권한이 없습니다.");
+        }
     }
 }

@@ -29,7 +29,7 @@ public class ArticleService {
     public void updateArticle(Long id, String subject, String contents, Long userId) {
         Article article = articleMapper.getArticleById(id);
 
-        if (article == null || !article.getUserId().equals(userId)) {
+        if (article == null || !article.isAuthor(userId)) {
             throw new IllegalStateException("글을 수정할 수 없습니다.");
         }
         articleMapper.updateArticle(id, subject, contents);
@@ -38,7 +38,7 @@ public class ArticleService {
     public void deleteArticle(Long id, Long userId) {
         Article article = articleMapper.getArticleById(id);
 
-        if (article == null || !article.getUserId().equals(userId)) {
+        if (article == null || !article.isAuthor(userId)) {
             throw new IllegalStateException("글을 삭제할 수 없습니다.");
         }
         articleMapper.deleteArticle(id);
