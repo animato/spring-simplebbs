@@ -59,6 +59,8 @@ public class ArticleController {
         return "view";
     }
 
+    // PermissionEvaluator 대체 가능
+//    @PreAuthorize("@articleService.getArticleById(#id).isAuthor(#user.getId())")
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable Long id, Model model, @AuthenticationPrincipal User user) {
         Article article = articleService.getArticleById(id);
