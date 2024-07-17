@@ -16,6 +16,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "user/login";
+    }
+
     @GetMapping("/register")
     public String registerPage(Model model) {
         model.addAttribute("userInput", new UserInput());

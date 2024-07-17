@@ -19,7 +19,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
-                        formLogin.permitAll()
+                        formLogin.loginPage("/login").permitAll()
                 )
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.accessDeniedPage("/accessDenied")
