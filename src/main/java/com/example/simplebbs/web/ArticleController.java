@@ -4,6 +4,7 @@ import com.example.simplebbs.article.Article;
 import com.example.simplebbs.article.ArticleService;
 import com.example.simplebbs.user.User;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +61,7 @@ public class ArticleController {
     }
 
     // PermissionEvaluator 대체 가능
-//    @PreAuthorize("@articleService.getArticleById(#id).isAuthor(#user.getId())")
+    @PreAuthorize("@articleService.getArticleById(#id).isAuthor(#user.getId())")
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable Long id, Model model, @AuthenticationPrincipal User user) {
         Article article = articleService.getArticleById(id);
