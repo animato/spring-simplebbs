@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CommentMapper {
     @Insert("""
               INSERT INTO comment (content, author, article_id, user_id) 
-              VALUES (#{content}, #{author}, #{articleId}, #{user_id})
+              VALUES (#{content}, #{author}, #{articleId}, #{userId})
             """)
     void insertComment(Comment comment);
 }

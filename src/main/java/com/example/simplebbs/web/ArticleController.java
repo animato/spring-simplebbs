@@ -57,6 +57,8 @@ public class ArticleController {
     public String view(@PathVariable("id") Long id, Model model) {
         Article article = articleService.getArticleById(id);
         model.addAttribute("article", article);
+
+        model.addAttribute("commentInput", new CommentInput());
         return "view";
     }
 
