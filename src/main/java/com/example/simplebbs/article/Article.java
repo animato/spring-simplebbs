@@ -1,6 +1,8 @@
 package com.example.simplebbs.article;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -12,6 +14,10 @@ public class Article {
     private String contents;
     private String author;
     private Long userId;
+
+    // 댓글 리스트 추가
+    private List<Comment> comments = new ArrayList<>();
+
     private Instant createdAt;
     private Instant updatedAt;
 
@@ -28,6 +34,14 @@ public class Article {
 
     public boolean isAuthor(Long userId) {
         return Objects.equals(this.userId, userId);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 
     // Getter 메서드
