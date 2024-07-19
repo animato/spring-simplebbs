@@ -16,13 +16,30 @@ public interface ArticleMapper {
     @Select("SELECT * FROM article")
     List<Article> getAllArticles();
 
-    @Select("SELECT * FROM article WHERE id = #{id}")
-    Article getArticleById(Long id);
+//    @Select("SELECT * FROM article WHERE id = #{id}")
+//    Article getArticleById(Long id);
 
     @Update("UPDATE article SET subject = #{subject}, contents = #{contents} WHERE id = #{id}")
     void updateArticle(Long id, String subject, String contents);
 
     @Delete("DELETE FROM article WHERE id = #{id}")
     void deleteArticle(Long id);
+
+
+    @Select("""
+            SELECT * FROM article
+            WHERE id = #{id}
+            """)
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "comments", column = "id", many = @Many(select = "selectCommentsByArticleId"))
+    })
+    Article getArticleById(Long id);
+
+    @Select("""
+            SELECT * FROM comment
+            WHERE article_id = #{articleId}
+            """)
+    List<Comment> selectCommentsByArticleId(Long articleId);
 }
 

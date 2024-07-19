@@ -22,10 +22,10 @@ public class CommentController {
                                @AuthenticationPrincipal User user,
                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/articles/" + commentInput.articleId;
+            return "redirect:/view/" + commentInput.articleId;
         }
 
         commentService.writeComment(commentInput.articleId, user.getId(), user.getUsername(), commentInput.content);
-        return "redirect:/articles/" + commentInput.articleId;
+        return "redirect:/view/" + commentInput.articleId;
     }
 }
