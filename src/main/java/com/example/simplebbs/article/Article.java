@@ -14,6 +14,7 @@ public class Article {
     private String contents;
     private String author;
     private Long userId;
+    private int commentCount; // 댓글 수 필드 추가
 
     // 댓글 리스트 추가
     private List<Comment> comments = new ArrayList<>();
@@ -83,5 +84,13 @@ public class Article {
                 ", updatedAt=" + updatedAt +
                 ", id=" + id +
                 '}';
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 }

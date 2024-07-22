@@ -24,8 +24,7 @@ public interface ArticleMapper {
 
     @Delete("DELETE FROM article WHERE id = #{id}")
     void deleteArticle(Long id);
-
-
+    
     @Select("""
             SELECT * FROM article
             WHERE id = #{id}
@@ -41,5 +40,13 @@ public interface ArticleMapper {
             WHERE article_id = #{articleId}
             """)
     List<Comment> selectCommentsByArticleId(Long articleId);
+
+    @Select("""
+            SELECT a.*, COUNT(c.id) as comment_count
+            FROM article a
+            LEFT JOIN comment c ON a.id = c.article_id
+            GROUP BY a.id
+            """)
+    List<Article> getArticlesWithCommentCount();
 }
 

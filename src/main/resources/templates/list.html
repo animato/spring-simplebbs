@@ -30,6 +30,7 @@
             <th scope="col">제목</th>
             <th scope="col">작성자</th>
             <th scope="col">작성일</th>
+            <th>댓글 수</th>
             <th scope="col">관리</th> <!-- 관리 섹션 추가 -->
         </tr>
         </thead>
@@ -42,6 +43,7 @@
             <td><a th:href="@{/view/{id}(id=${article.id})}" th:text="${article.subject}">예시 글 제목</a></td>
             <td th:text="${article.author}">홍길동</td>
             <td th:text="${#dates.format(article.createdAt, 'yyyy-MM-dd hh:mm:ss')}">2024-06-26</td>
+            <td th:text="${article.commentCount}">0</td>
             <td>
                 <!-- 글 수정, 삭제 버튼 추가 -->
                 <a th:href="@{/edit/{id}(id=${article.id})}" class="btn btn-sm btn-warning">수정</a>
