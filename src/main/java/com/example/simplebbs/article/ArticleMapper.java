@@ -24,21 +24,21 @@ public interface ArticleMapper {
 
     @Delete("DELETE FROM article WHERE id = #{id}")
     void deleteArticle(Long id);
-    
-    @Select("""
-            SELECT * FROM article
-            WHERE id = #{id}
-            """)
-    @Results({
-            @Result(property = "id", column = "id"),
-            @Result(property = "comments", column = "id", many = @Many(select = "selectCommentsByArticleId"))
-    })
+
+    //    @Select("""
+//            SELECT * FROM article
+//            WHERE id = #{id}
+//            """)
+//    @Results({
+//            @Result(property = "id", column = "id"),
+//            @Result(property = "comments", column = "id", many = @Many(select = "selectCommentsByArticleId"))
+//    })
     Article getArticleById(Long id);
 
-    @Select("""
-            SELECT * FROM comment
-            WHERE article_id = #{articleId}
-            """)
+    //    @Select("""
+//            SELECT * FROM comment
+//            WHERE article_id = #{articleId}
+//            """)
     List<Comment> selectCommentsByArticleId(Long articleId);
 
     @Select("""
