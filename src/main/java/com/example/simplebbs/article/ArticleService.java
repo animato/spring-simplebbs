@@ -19,8 +19,7 @@ public class ArticleService {
     }
 
     public List<Article> getAllArticles() {
-//        return articleMapper.getAllArticles();
-        return articleMapper.getArticlesWithCommentCount();
+        return articleMapper.getAllArticles();
     }
 
     public Article getArticleById(Long id) {

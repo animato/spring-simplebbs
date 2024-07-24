@@ -4,11 +4,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class Article {
-    private static final Random RANDOM = new Random(); // ID 값 생성기, 데이터베이스 ID 가 적용되면 대체됨
-
     private Long id;
     private String subject;
     private String contents;
@@ -24,7 +21,6 @@ public class Article {
 
     // 모든 필수 필드를 포함한 생성자
     public Article(String subject, String contents, String author, Long userId) {
-        this.id = RANDOM.nextLong(Long.MAX_VALUE);
         this.subject = subject;
         this.contents = contents;
         this.author = author;
@@ -90,7 +86,7 @@ public class Article {
         return commentCount;
     }
 
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
-    }
+//    public void setCommentCount(int commentCount) {
+//        this.commentCount = commentCount;
+//    }
 }
